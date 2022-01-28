@@ -20,7 +20,7 @@ docker-compose up
  ```
 ## Specification
 ### Using Python, JavaScript, HTML, and CSS, complete the implementation of a social network that allows users to make posts, follow other users, and “like” posts. You must fulfill the following requirements:
-- New Post: Users who are signed in should be able to write a new text-based post by filling in text into a text area and then clicking a button to submit the post.
+- <bold>New Post:</bold> Users who are signed in should be able to write a new text-based post by filling in text into a text area and then clicking a button to submit the post.
 - All Posts: The “All Posts” link in the navigation bar should take the user to a page where they can see all posts from all users, with the most recent posts first.
 - Profile Page: Clicking on a username should load that user’s profile page. This page should:
   - Display the number of followers the user has, as well as the number of people that the user follows.
