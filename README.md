@@ -7,7 +7,7 @@ docker-compose up
 * Make sure you have docker and docker-compose on your machine
 * If you have some trouble with docker (like me 😅😅) don't hesitate to do it the old way
 * Create your virtual environment
- run
+* run
  ``` 
  pip install -r requeriments.txt
  ```
