@@ -19,4 +19,4 @@ docker-compose up
 - Pagination: On any page that displays posts, posts should only be displayed 10 on a page. If there are more than ten posts, a “Next” button should appear to take the user to the next page of posts (which should be older than the current page of posts). If not on the first page, a “Previous” button should appear to take the user to the previous page of posts as well.
 - “Like” and “Unlike”: Users should be able to click a button or link on any post to toggle whether or not they “like” that post.
 Using JavaScript, you should asynchronously let the server know to update the like count (as via a call to fetch) and then update the post’s like count displayed on the page, without requiring a reload of the entire page.
-- for more information <a href="https://cs50.harvard.edu/web/2020/projects/4/network/">Click here</a>
+- for more information <a href="https://cs50.harvard.edu/web/2020/projects/4/network/">Click here</a> To go to the CS50 explanation
