@@ -13,12 +13,15 @@ from .models import Follow, User, Post
 
 def index(request):
     posts = Post.objects.all().order_by('-time')
+    # Using django paginator class to show only five posts in one page
     paginator = Paginator(posts, 5)
     page_number = request.GET.get('page')
+    # for more information https://docs.djangoproject.com/en/3.0/topics/pagination/
     page_obj = paginator.get_page(page_number)
     return render(request, "network/index.html", {'posts': page_obj})
 
 
+# ------------------------- These views I didn't do them there were given to me by CS50 staff ------------------------
 def login_view(request):
     if request.method == "POST":
 
@@ -70,6 +73,8 @@ def register(request):
     else:
         return render(request, "network/register.html")
 
+# ------------------------------------End of CS50 views -----------------------------------------------
+
 
 @login_required
 def create_post(request):
@@ -84,14 +89,18 @@ def create_post(request):
     return redirect('index')
 
 
+# I sent the csrf token withen every request in its headers so no need to use @csrf_exempt decorator as it is not safe
 # @csrf_exempt
 def like_post(request):
     print(request.method)
     if request.method == 'PUT':
         id = json.loads(request.body).get('id')
         post = get_object_or_404(Post, pk=id)
+        # check if the logedin user in post.likers if yes so remove him else add him to the likers
+        # I designed it to be a one request in the front end and handel the logic in the back end
         if request.user in post.likers.all():
             post.likers.remove(request.user)
+            # retriving the count of the likers to send it with the response to update the html AJAX without refreshing the page
             count = post.likers.count()
             return JsonResponse({'message': 'You disliked this post 👎', 'color': 'secondary', 'count': count}, status=200)
         else:
@@ -104,8 +113,13 @@ def like_post(request):
 
 def profile(request, id):
     user = get_object_or_404(User, pk=id)
+    # retriving all the posts the user has created using a reverse relation in the user field in
+    # Post model using the related_name which is creator
     user_posts = user.creator.all()
     try:
+        # try to get the follow object which has these credenchials if the object exits so do this logic
+        # else do the other logic
+        # 🌹🌹🌹 I think that this is better handeled in the front end what do you think 😃😃😃
         follow = Follow.objects.get(followed=user, follower=request.user)
         text = 'Unfollow'
         color = 'secondary'
@@ -114,6 +128,8 @@ def profile(request, id):
         color = 'danger'
 
     return render(request, 'network/profile.html', {'userprofile': user, 'user_posts': user_posts, 'text': text, 'color': color})
+
+# This one blow my mind until i get it done 😂😂
 
 
 def follow(request, id):
@@ -133,6 +149,8 @@ def follow(request, id):
             return JsonResponse({'message': f'you {request.user.username} unfollowed this user {user1.username} 👎',
                                 'color': 'danger', 'count': count}, status=200)
 
+# I think there is a disaster here
+
 
 @login_required
 def following_page(request):
@@ -141,6 +159,8 @@ def following_page(request):
     for follow in users_this_user_follows:
         user_posts = Post.objects.filter(user=follow.followed)
         posts.append(user_posts)
+    # I got an array of querysets so to render them correctly in the template I had to do nested loop in the template
+    #  which is very bad I hope there is another solution 😥😥😥
     print(posts, '🌹🌹🌹')
     print(users_this_user_follows)
     return render(request, 'network/following_page.html', {'posts': posts})
