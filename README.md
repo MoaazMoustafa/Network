@@ -5,6 +5,12 @@ CS50 Web Programming Using Python and JavaScript project 4
 docker-compose up
 ```
 * Make sure you have docker and docker-compose on your machine
+* If you have some trouble with docker (like me 😅😅) don't hesitate to do it the old way
+* Create your virtual environment
+* ```
+* run pip install -r requeriments.txt
+* ```
+* make sure to change the database credentials
 ## Specification
 ### Using Python, JavaScript, HTML, and CSS, complete the implementation of a social network that allows users to make posts, follow other users, and “like” posts. You must fulfill the following requirements:
 - New Post: Users who are signed in should be able to write a new text-based post by filling in text into a text area and then clicking a button to submit the post.
