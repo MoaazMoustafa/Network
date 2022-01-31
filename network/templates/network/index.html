@@ -26,7 +26,7 @@
             {% else %}
             <button id="likeBtn" class="btn btn-secondary " onclick="handelLikeBtn(event,{{post.id}})">Like</button>
             {% endif %}
-            <strong id="likes_count">{{ post.likers.all.count }}</strong>
+            <strong >{{ post.likers.all.count }}</strong>
           {% endif %}
         </p>
         

@@ -16,6 +16,7 @@ function handelLikeBtn(e,id){
         let color = res.color
         e.target.classList = 'btn btn-' +color
         e.target.innerHTML = color == 'secondary' ? 'Like' : 'Unlike'
-        document.getElementById('likes_count').innerHTML = res.count
+        // console.log(e.target.nextElementSibling)
+        e.target.nextElementSibling.innerHTML = res.count
     })
 }
